@@ -23,7 +23,7 @@ const database = process.env.DB_NAME || 'postgres';
     TypeOrmModule.forRoot({
       //@ts-ignore
       type,
-      host,
+      host:"db",
       port,
       username,
       password,
