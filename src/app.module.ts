@@ -2,8 +2,10 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RecipesModule } from './recipes/recipes.module';
 
 import * as process from "process";
+import { GraphQLModule } from '@nestjs/graphql';
 
 
 const username = process.env.POSTGRES_USER || 'postgres';
@@ -17,6 +19,7 @@ const database = process.env.DB_NAME || 'postgres';
 
 @Module({
   imports: [
+    RecipesModule,
     TypeOrmModule.forRoot({
       //@ts-ignore
       type,
@@ -29,6 +32,12 @@ const database = process.env.DB_NAME || 'postgres';
       synchronize: true,
       keepConnectionAlive: true
     }),
+    GraphQLModule.forRoot({
+      debug: true,
+      playground: true,
+      autoSchemaFile: 'schema.gql',
+    }),
+
   ],
   controllers: [AppController],
   providers: [AppService],
