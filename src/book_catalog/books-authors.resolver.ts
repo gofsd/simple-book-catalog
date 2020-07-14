@@ -17,12 +17,10 @@ export class BookResolver {
 
   @Query(returns => Book, {nullable: true})
   async getBook(@Args('id') id: number): Promise<any> {
-    //@ts-ignore
     const book = await this.bookService.getBook(id);
     if (!book) {
       return null;
     }
-    //@ts-ignore
     return book;
   }
 
@@ -56,7 +54,6 @@ export class AuthorResolver {
     if (!author) {
       return null;
     }
-    //@ts-ignore
     return author;
   }
 
@@ -74,11 +71,7 @@ export class AuthorResolver {
   async createAuthor(
     @Args('newAuthorData') newAuthorData: AuthorInput,
   ): Promise<Author> {
-    console.log(this, 'from books authors resolver')
-    //@ts-ignore
     const author = await this.bookService.createAuthor(newAuthorData);
-        //@ts-ignore
-
     return author;
   }
 
@@ -87,8 +80,6 @@ export class AuthorResolver {
     @Args('bookId') bookId: number,
     @Args('authorId') authorId: number
     ): Promise<Book> {
-      console.log('add author: ', bookId, authorId)
-      //@ts-ignore
     return this.bookService.addAuthor(bookId, authorId);
   }
 
