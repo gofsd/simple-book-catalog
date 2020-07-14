@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RecipesModule } from './recipes/recipes.module';
+import { RecipesModule } from './book_catalog/books-authors.module';
 
 import * as process from "process";
 import { GraphQLModule } from '@nestjs/graphql';
@@ -23,7 +23,7 @@ const database = process.env.DB_NAME || 'postgres';
     TypeOrmModule.forRoot({
       //@ts-ignore
       type,
-      host:"db",
+      host:"localhost",
       port,
       username,
       password,

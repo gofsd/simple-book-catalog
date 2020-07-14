@@ -2,33 +2,40 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Recipe {
-  id: ID!
+type Book {
+  id: Int!
   title: String!
-  description: String
-  creationDate: Date!
-  ingredients: [String!]!
+  authors: [Author!]!
 }
 
-"""Date custom scalar type"""
-scalar Date
+type Author {
+  id: Int!
+  firstName: String
+  lastName: String
+  books: [Book!]!
+}
 
 type Query {
-  recipe(id: String!): Recipe!
-  recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
+  getBook(id: Float!): Book
+  getBooks(title: String): [Book!]
+  getAuthor(id: Float!): Author
+  getAuthors(maxNumberOfBooks: Float, minNumberOfBooks: Float): [Author!]
 }
 
 type Mutation {
-  addRecipe(newRecipeData: NewRecipeInput!): Recipe!
-  removeRecipe(id: String!): Boolean!
+  createBook(newBookData: BookInput!): Book!
+  deleteBook(id: Float!): Float!
+  createAuthor(newAuthorData: AuthorInput!): Author!
+  addAuthor(authorId: Float!, bookId: Float!): Book!
+  deleteAuthor(id: Float!): Float!
+  deleteAuthorWithBooks(id: Float!): Float!
 }
 
-input NewRecipeInput {
+input BookInput {
   title: String!
-  description: String
-  ingredients: [String!]!
 }
 
-type Subscription {
-  recipeAdded: Recipe!
+input AuthorInput {
+  firstName: String!
+  lastName: String!
 }
